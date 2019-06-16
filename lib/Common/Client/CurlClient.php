@@ -37,7 +37,7 @@ class CurlClient implements CurlClientInterface
     private $proxy;
 
     /** @var array */
-    private $defaultHeaders = [];
+    private $defaultHeaders = array();
 
     /**
      * @param $path
@@ -49,7 +49,7 @@ class CurlClient implements CurlClientInterface
      * @throws AuthorizeException
      * @throws ClientException
      */
-    public function execute($path, $method, $queryParams = [], $body = null, $headers = [])
+    public function execute($path, $method, $queryParams = array(), $body = null, $headers = array())
     {
         $attempts = $this->attempts;
         $response = $this->call($path, $method, $queryParams, $body, $headers);
@@ -121,7 +121,7 @@ class CurlClient implements CurlClientInterface
      * @throws AuthorizeException
      * @throws ClientException
      */
-    private function call($path, $method, array $queryParams = [], $body = null, array $headers = [])
+    private function call($path, $method, array $queryParams = array(), $body = null, array $headers = array())
     {
         $url = $this->url . $path;
 
@@ -247,7 +247,7 @@ class CurlClient implements CurlClientInterface
             $this->handleCurlError($curlError, $curlErrno);
         }
 
-        return [$headers, $body, $responseInfo];
+        return array($headers, $body, $responseInfo);
     }
 
     /**
