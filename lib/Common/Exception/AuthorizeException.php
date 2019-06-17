@@ -3,7 +3,6 @@
 namespace Mbilling\Common\Exception;
 
 
-class AuthorizeException extends ClientException
+class AuthorizeException extends ApiException
 {
-
 }

@@ -6,7 +6,7 @@ namespace Mbilling\Common\Helper;
 class ConfigurationLoader
 {
     /** @var array */
-    private $configParams = [];
+    private $configParams = array();
 
     public function load()
     {

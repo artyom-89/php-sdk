@@ -33,7 +33,7 @@ class Notification
     /**
      * @return Model\NotificationInterface
      * @throws AuthorizeException
-     * @throws Common\Exception\ClientException
+     * @throws Common\Exception\ApiException
      */
     public function process()
     {
@@ -41,7 +41,7 @@ class Notification
         $notification = new NotificationResponse($request);
         $object = $notification->getObject();
 
-        return $this->client->getNotification(['id' => $object->getId()]);
+        return $this->client->getNotification(array('id' => $object->getId()));
     }
 
     /**
@@ -55,7 +55,7 @@ class Notification
         }
 
         $requestBody = file_get_contents('php://input');
-        $request = new Response(200, [], $requestBody);
+        $request = new Response(200, array(), $requestBody);
         return JSON::decode($request);
     }
 }

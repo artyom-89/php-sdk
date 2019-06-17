@@ -20,7 +20,8 @@ class Client
 
     public function __construct()
     {
-        $config = (new ConfigurationLoader())->load()->getConfig();
+        $configurationLoader = new ConfigurationLoader();
+        $config = $configurationLoader->load()->getConfig();
 
         $this->curlClient = new CurlClient();
         $this->curlClient->setUrl($config['url']);
@@ -38,8 +39,7 @@ class Client
     /**
      * @param array $request
      * @return PaymentInterface
-     * @throws Common\Exception\AuthorizeException
-     * @throws Common\Exception\ClientException
+     * @throws Common\Exception\ApiException
      */
     public function createPayment(array $request)
     {
@@ -51,8 +51,7 @@ class Client
     /**
      * @param array $request
      * @return PaymentInterface
-     * @throws Common\Exception\AuthorizeException
-     * @throws Common\Exception\ClientException
+     * @throws Common\Exception\ApiException
      */
     public function getPayment(array $request)
     {
@@ -64,8 +63,7 @@ class Client
     /**
      * @param array $request
      * @return NotificationInterface
-     * @throws Common\Exception\AuthorizeException
-     * @throws Common\Exception\ClientException
+     * @throws Common\Exception\ApiException
      */
     public function getNotification(array $request)
     {

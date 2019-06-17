@@ -2,9 +2,14 @@
 
 namespace Mbilling\Common\Client;
 
+use Mbilling\Common\Exception\ApiException;
 use Mbilling\Common\Exception\AuthorizeException;
 use Mbilling\Common\Exception\ClientConnectionException;
 use Mbilling\Common\Exception\ClientException;
+use Mbilling\Common\Exception\ForbiddenException;
+use Mbilling\Common\Exception\InternalServerErrorException;
+use Mbilling\Common\Exception\NotFoundException;
+use Mbilling\Common\Exception\UnauthorizedException;
 use Mbilling\Common\Helper\HeadersParser;
 use Mbilling\Common\HttpMethod;
 use Mbilling\Common\Response;
@@ -42,12 +47,17 @@ class CurlClient implements CurlClientInterface
     /**
      * @param $path
      * @param $method
-     * @param $queryParams
+     * @param array $queryParams
      * @param null $body
      * @param array $headers
      * @return Response
-     * @throws AuthorizeException
+     * @throws ApiException
+     * @throws ClientConnectionException
      * @throws ClientException
+     * @throws ForbiddenException
+     * @throws InternalServerErrorException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     public function execute($path, $method, $queryParams = array(), $body = null, $headers = array())
     {
@@ -58,6 +68,10 @@ class CurlClient implements CurlClientInterface
             $this->delay();
             $attempts--;
             $response = $this->call($path, $method, $queryParams, $body, $headers);
+        }
+
+        if ($response->getCode() != 200) {
+            $this->handleError($response);
         }
 
         return $response;
@@ -114,11 +128,12 @@ class CurlClient implements CurlClientInterface
     /**
      * @param $path
      * @param $method
-     * @param $queryParams
+     * @param array $queryParams
      * @param null $body
      * @param array $headers
      * @return Response
      * @throws AuthorizeException
+     * @throws ClientConnectionException
      * @throws ClientException
      */
     private function call($path, $method, array $queryParams = array(), $body = null, array $headers = array())
@@ -272,6 +287,31 @@ class CurlClient implements CurlClientInterface
         }
         $msg .= "\n\n(Network error [errno $errno]: $error)";
         throw new ClientConnectionException($msg);
+    }
+
+    /**
+     * @param Response $response
+     * @throws ForbiddenException
+     * @throws InternalServerErrorException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
+     */
+    private function handleError(Response $response)
+    {
+        switch ($response->getCode()) {
+            case InternalServerErrorException::HTTP_CODE:
+                throw new InternalServerErrorException($response);
+                break;
+            case NotFoundException::HTTP_CODE:
+                throw new NotFoundException($response);
+                break;
+            case ForbiddenException::HTTP_CODE:
+                throw new ForbiddenException($response);
+                break;
+            case UnauthorizedException::HTTP_CODE:
+                throw new UnauthorizedException($response);
+                break;
+        }
     }
 
     /**

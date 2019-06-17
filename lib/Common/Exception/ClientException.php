@@ -3,6 +3,6 @@
 namespace Mbilling\Common\Exception;
 
 
-class ClientException extends \Exception
+class ClientException extends ApiException
 {
 }

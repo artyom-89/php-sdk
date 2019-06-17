@@ -11,7 +11,7 @@ class HeadersParser
      */
     public static function parse($httpHeaders)
     {
-        $headers = [];
+        $headers = array();
         $key = '';
 
         foreach (explode("\n", $httpHeaders) as $httpHeader) {
@@ -23,9 +23,9 @@ class HeadersParser
                 if (!isset($headers[$header[0]])) {
                     $headers[trim($header[0])] = trim($header[1]);
                 } elseif (is_array($headers[$header[0]])) {
-                    $headers[trim($header[0])] = array_merge($headers[trim($header[0])], [trim($header[1])]);
+                    $headers[trim($header[0])] = array_merge($headers[trim($header[0])], array(trim($header[1])));
                 } else {
-                    $headers[trim($header[0])] = array_merge([$headers[trim($header[0])]], [trim($header[1])]);
+                    $headers[trim($header[0])] = array_merge(array($headers[trim($header[0])]), array(trim($header[1])));
                 }
                 $key = $header[0];
             } else {
