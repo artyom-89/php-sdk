@@ -14,7 +14,7 @@ PHP 5.3.2 (и выше) с расширением libcurl
 composer require m-billing/php-sdk
 ```
 
-### Composer (composer.json)
+## Composer (composer.json)
 1. Добавьте строку `"m-billing/php-sdk": "*"` в список зависимостей вашего проекта в файле composer.json
 ```
 "require": {
@@ -30,7 +30,7 @@ composer update
 require __DIR__ . '/vendor/autoload.php';
 ```
 
-### Вручную
+## Вручную
 
 1. Скачайте [архив M.Billing PHP SDK](https://github.com/m-billing/php-sdk/archive/master.zip), распакуйте его и скопируйте каталог lib в нужное место в вашем проекте.
 2. В коде вашего проекта подключите автозагрузку файлов нашего клиента:
