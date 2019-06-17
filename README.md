@@ -30,7 +30,7 @@ composer update
 require __DIR__ . '/vendor/autoload.php';
 ```
 
-## Вручную
+## Установка вручную
 
 1. Скачайте [архив M.Billing PHP SDK](https://github.com/m-billing/php-sdk/archive/master.zip), распакуйте его и скопируйте каталог lib в нужное место в вашем проекте.
 2. В коде вашего проекта подключите автозагрузку файлов нашего клиента:
