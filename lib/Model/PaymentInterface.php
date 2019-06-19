@@ -13,11 +13,6 @@ interface PaymentInterface
     public function getId();
 
     /**
-     * @return string
-     */
-    public function getProjectId();
-
-    /**
      * @return \DateTime
      */
     public function getCreatedAt();

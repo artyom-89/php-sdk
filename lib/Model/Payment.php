@@ -9,8 +9,6 @@ class Payment implements PaymentInterface
 {
     /** @var string */
     private $id;
-    /** @var string */
-    private $projectId;
     /** @var \DateTime */
     private $createdAt;
     /** @var \DateTime */
@@ -51,22 +49,6 @@ class Payment implements PaymentInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param string $projectId
-     */
-    protected function setProjectId($projectId)
-    {
-        $this->projectId = $projectId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
     }
 
     /**

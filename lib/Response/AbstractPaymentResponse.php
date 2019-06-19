@@ -14,7 +14,6 @@ abstract class AbstractPaymentResponse extends Payment implements PaymentInterfa
     public function __construct(array $response)
     {
         $this->setId($response['id']);
-        $this->setProjectId($response['project_id']);
         $this->setCreatedAt(new \DateTime($response['created_at']));
         $this->setStatus($response['status']);
 
