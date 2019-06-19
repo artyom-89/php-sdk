@@ -21,7 +21,7 @@ interface NotificationInterface
     public function getEvent();
 
     /**
-     * @return PaymentInterface
+     * @return PaymentInterface|SubscriptionInterface
      */
     public function getObject();
 }

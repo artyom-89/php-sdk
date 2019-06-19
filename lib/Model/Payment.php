@@ -12,25 +12,27 @@ class Payment implements PaymentInterface
     /** @var string */
     private $projectId;
     /** @var \DateTime */
-    private $createAt;
+    private $createdAt;
+    /** @var \DateTime */
+    private $canceledAt;
     /** @var string */
     private $status;
     /** @var PaymentErrorInterface|null */
     private $error;
-    /** @var string */
-    private $paymentMethod;
     /** @var string|null */
     private $confirmationUrl;
+    /** @var string */
+    private $paymentMethod;
     /** @var PaymentPayer */
     private $payer;
-    /** @var MoneyTypeInterface */
-    private $amount;
-    /** @var MoneyTypeInterface */
-    private $profit;
     /** @var string */
     private $account;
     /** @var string */
     private $description;
+    /** @var MoneyTypeInterface */
+    private $amount;
+    /** @var MoneyTypeInterface */
+    private $refundedAmount;
     /** @var boolean */
     private $test;
 
@@ -68,19 +70,35 @@ class Payment implements PaymentInterface
     }
 
     /**
-     * @param \DateTime $createAt
+     * @param \DateTime $createdAt
      */
-    protected function setCreateAt($createAt)
+    protected function setCreatedAt($createdAt)
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
      * @return \DateTime
      */
-    public function getCreateAt()
+    public function getCreatedAt()
     {
-        return $this->createAt;
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $canceledAt
+     */
+    protected function setCanceledAt($canceledAt)
+    {
+        $this->canceledAt = $canceledAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCanceledAt()
+    {
+        return $this->canceledAt;
     }
 
     /**
@@ -180,19 +198,19 @@ class Payment implements PaymentInterface
     }
 
     /**
-     * @param MoneyTypeInterface $profit
+     * @param MoneyTypeInterface $refundedAmount
      */
-    protected function setProfit($profit)
+    public function setRefundedAmount($refundedAmount)
     {
-        $this->profit = $profit;
+        $this->refundedAmount = $refundedAmount;
     }
 
     /**
      * @return MoneyTypeInterface
      */
-    public function getProfit()
+    public function getRefundedAmount()
     {
-        return $this->profit;
+        return $this->refundedAmount;
     }
 
     /**

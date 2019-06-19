@@ -20,7 +20,12 @@ interface PaymentInterface
     /**
      * @return \DateTime
      */
-    public function getCreateAt();
+    public function getCreatedAt();
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getCanceledAt();
 
     /**
      * @return string
@@ -28,7 +33,7 @@ interface PaymentInterface
     public function getStatus();
 
     /**
-     * @return PaymentErrorInterface
+     * @return PaymentErrorInterface|null
      */
     public function getError();
 
@@ -63,9 +68,9 @@ interface PaymentInterface
     public function getAmount();
 
     /**
-     * @return MoneyTypeInterface
+     * @return MoneyTypeInterface|null
      */
-    public function getProfit();
+    public function getRefundedAmount();
 
     /**
      * @return boolean

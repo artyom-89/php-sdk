@@ -8,8 +8,10 @@ use Mbilling\Common\Helper\JSON;
 use Mbilling\Common\HttpMethod;
 use Mbilling\Model\NotificationInterface;
 use Mbilling\Model\PaymentInterface;
+use Mbilling\Model\SubscriptionInterface;
 use Mbilling\Response\NotificationResponse;
 use Mbilling\Response\PaymentResponse;
+use Mbilling\Response\SubscriptionResponse;
 
 
 class Client
@@ -55,9 +57,33 @@ class Client
      */
     public function getPayment(array $request)
     {
-        $path = "/payments/find";
+        $path = "/payments/get";
         $response = $this->curlClient->execute($path, HttpMethod::POST, $request);
         return new PaymentResponse(JSON::decode($response));
+    }
+
+    /**
+     * @param array $request
+     * @return SubscriptionInterface
+     * @throws Common\Exception\ApiException
+     */
+    public function createSubscription(array $request)
+    {
+        $path = "/subscriptions/create";
+        $response = $this->curlClient->execute($path, HttpMethod::POST, $request);
+        return new SubscriptionResponse(JSON::decode($response));
+    }
+
+    /**
+     * @param array $request
+     * @return SubscriptionInterface
+     * @throws Common\Exception\ApiException
+     */
+    public function getSubscription(array $request)
+    {
+        $path = "/subscriptions/get";
+        $response = $this->curlClient->execute($path, HttpMethod::POST, $request);
+        return new SubscriptionResponse(JSON::decode($response));
     }
 
     /**
@@ -67,7 +93,7 @@ class Client
      */
     public function getNotification(array $request)
     {
-        $path = "/notifications/find";
+        $path = "/notifications/get";
         $response = $this->curlClient->execute($path, HttpMethod::POST, $request);
         return new NotificationResponse(JSON::decode($response));
     }

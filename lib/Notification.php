@@ -39,9 +39,7 @@ class Notification
     {
         $request = $this->getRequest();
         $notification = new NotificationResponse($request);
-        $object = $notification->getObject();
-
-        return $this->client->getNotification(array('id' => $object->getId()));
+        return $this->client->getNotification(array('id' => $notification->getId()));
     }
 
     /**

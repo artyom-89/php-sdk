@@ -5,13 +5,20 @@ namespace Mbilling\Model;
 
 class Notification implements NotificationInterface
 {
+    const EVENT_PAYMENT_SUCCEEDED = 'payment.succeeded';
+    const EVENT_PAYMENT_CANCELED = 'payment.canceled';
+
+    const EVENT_SUBSCRIPTION_STARTED = 'subscription.started';
+    const EVENT_SUBSCRIPTION_STOPPED = 'subscription.stopped';
+    const EVENT_SUBSCRIPTION_CANCELED = 'subscription.canceled';
+
     /** @var string */
     private $id;
     /** @var string */
     private $type;
     /** @var string */
     private $event;
-    /** @var PaymentInterface */
+    /** @var PaymentInterface|SubscriptionInterface */
     private $object;
 
     /**
@@ -63,7 +70,7 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * @param PaymentInterface $object
+     * @param PaymentInterface|SubscriptionInterface $object
      */
     protected function setObject($object)
     {
@@ -71,7 +78,7 @@ class Notification implements NotificationInterface
     }
 
     /**
-     * @return PaymentInterface
+     * @return PaymentInterface|SubscriptionInterface
      */
     public function getObject()
     {

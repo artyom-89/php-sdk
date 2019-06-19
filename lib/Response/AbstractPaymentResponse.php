@@ -15,8 +15,12 @@ abstract class AbstractPaymentResponse extends Payment implements PaymentInterfa
     {
         $this->setId($response['id']);
         $this->setProjectId($response['project_id']);
-        $this->setCreateAt(new \DateTime($response['created_at']));
+        $this->setCreatedAt(new \DateTime($response['created_at']));
         $this->setStatus($response['status']);
+
+        if (isset($response['canceled_at'])) {
+            $this->setCanceledAt(new \DateTime($response['canceled_at']));
+        }
 
         if (isset($response['error'])) {
             $error = new PaymentError();
@@ -44,10 +48,12 @@ abstract class AbstractPaymentResponse extends Payment implements PaymentInterfa
         $amount->setCurrency($response['currency']);
         $this->setAmount($amount);
 
-        $profit = new MoneyType();
-        $profit->setValue((float) $response['profit']);
-        $profit->setCurrency($response['currency']);
-        $this->setProfit($profit);
+        if (isset($response['refunded_amount'])) {
+            $refundedAmount = new MoneyType();
+            $refundedAmount->setValue((float) $response['refunded_amount']);
+            $refundedAmount->setCurrency($response['currency']);
+            $this->setRefundedAmount($refundedAmount);
+        }
 
         $this->setTest((boolean) $response['test']);
     }

@@ -17,5 +17,9 @@ abstract class AbstractNotificationResponse extends Notification implements Noti
         if (strpos('payment.', $response['event']) !== false) {
             $this->setObject(new PaymentResponse($response['event']));
         }
+
+        if (strpos('subscription.', $response['event']) !== false) {
+            $this->setObject(new PaymentResponse($response['event']));
+        }
     }
 }
