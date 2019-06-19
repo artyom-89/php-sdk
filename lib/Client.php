@@ -79,6 +79,18 @@ class Client
      * @return SubscriptionInterface
      * @throws Common\Exception\ApiException
      */
+    public function confirmSubscription(array $request)
+    {
+        $path = "/subscriptions/confirm";
+        $response = $this->curlClient->execute($path, HttpMethod::POST, $request);
+        return new SubscriptionResponse(JSON::decode($response));
+    }
+
+    /**
+     * @param array $request
+     * @return SubscriptionInterface
+     * @throws Common\Exception\ApiException
+     */
     public function getSubscription(array $request)
     {
         $path = "/subscriptions/get";
