@@ -25,12 +25,12 @@ interface SubscriptionInterface
     /**
      * @return \DateTime|null
      */
-    public function getStoppedAt();
+    public function getCanceledAt();
 
     /**
      * @return \DateTime|null
      */
-    public function getCanceledAt();
+    public function getDebitedAt();
 
     /**
      * @return string

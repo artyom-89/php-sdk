@@ -15,9 +15,9 @@ class Subscription implements SubscriptionInterface
     /** @var \DateTime */
     private $startedAt;
     /** @var \DateTime */
-    private $stoppedAt;
-    /** @var \DateTime */
     private $canceledAt;
+    /** @var \DateTime */
+    private $debitedAt;
     /** @var string */
     private $status;
     /** @var boolean */
@@ -85,22 +85,6 @@ class Subscription implements SubscriptionInterface
     }
 
     /**
-     * @param \DateTime $stoppedAt
-     */
-    protected function setStoppedAt($stoppedAt)
-    {
-        $this->stoppedAt = $stoppedAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getStoppedAt()
-    {
-        return $this->stoppedAt;
-    }
-
-    /**
      * @param \DateTime $canceledAt
      */
     protected function setCanceledAt($canceledAt)
@@ -114,6 +98,22 @@ class Subscription implements SubscriptionInterface
     public function getCanceledAt()
     {
         return $this->canceledAt;
+    }
+
+    /**
+     * @param \DateTime $debitedAt
+     */
+    public function setDebitedAt($debitedAt)
+    {
+        $this->debitedAt = $debitedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDebitedAt()
+    {
+        return $this->debitedAt;
     }
 
     /**

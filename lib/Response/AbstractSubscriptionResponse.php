@@ -16,11 +16,11 @@ abstract class AbstractSubscriptionResponse extends Subscription implements Subs
         if (isset($response['started_at'])) {
             $this->setStartedAt(new \DateTime($response['started_at']));
         }
-        if (isset($response['stopped_at'])) {
-            $this->setStoppedAt(new \DateTime($response['stopped_at']));
-        }
         if (isset($response['canceled_at'])) {
             $this->setCanceledAt(new \DateTime($response['canceled_at']));
+        }
+        if (isset($response['debited_at'])) {
+            $this->setDebitedAt(new \DateTime($response['debited_at']));
         }
 
         $this->setStatus($response['status']);
