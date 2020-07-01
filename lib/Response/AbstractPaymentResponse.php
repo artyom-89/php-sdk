@@ -24,7 +24,7 @@ abstract class AbstractPaymentResponse extends Payment implements PaymentInterfa
         if (isset($response['error'])) {
             $error = new PaymentError();
             $error->setCode($response['error']['code']);
-            $error->setCode($response['error']['description']);
+            $error->setDescription($response['error']['description']);
             $this->setError($error);
         }
 
